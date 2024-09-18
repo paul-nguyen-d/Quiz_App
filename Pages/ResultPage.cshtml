@@ -1,0 +1,28 @@
+﻿@page "{attemptId}"
+@model ResultPageModel
+@{
+    var score = 0;
+}
+
+<h1>Congratulations on finishing your quiz! Here's your result</h1>
+
+@foreach(var response in Model.Attempt.Responses)
+{
+    <div class="input-group mb-3">
+        <div class="w-50">
+            <input type="text" id="disabledTextInput" class="form-control" readonly value="@response.Question.Content">
+        </div>
+        @if (response.AnswerId == response.Question.CorrectAnswerId)
+        {
+            score++;
+            <button type="button" disabled class="btn btn-success">Correct</button>
+        }
+        else
+        {
+            <button type="button" disabled class="btn btn-danger">Incorrect</button>
+        }
+    </div>
+}
+<div>
+    <h3>Final Score: @score</h3>
+</div>

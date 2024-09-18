@@ -1,0 +1,18 @@
+﻿@page
+@model QuizApp.Pages.AddQuizModel
+@{
+}
+<h1>Add Quiz</h1>
+<form method="post">
+    <div class="mb-3">
+        <label for="title" class="form-label">Title </label>
+        <input type="text" class="form-control" asp-for="QuizTitle" id="title">
+    </div>
+    <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+        <input type="text" class="form-control" asp-for="QuizDescription" id="description">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+

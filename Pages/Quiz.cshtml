@@ -1,0 +1,57 @@
+﻿@page "{id}"
+@model QuizApp.Pages.QuizModel
+@{
+    ViewData["Title"] = $"Quiz: {Model.Quiz.Title}";
+}
+
+<h1>Quiz Details</h1>
+<div class="mb-3 row">
+    <label for="title" class="col-sm-2 col-form-label">Title</label>
+    <div class="col-sm-10">
+        <input type="text" readonly class="form-control" id="title" value="@Model.Quiz.Title">
+    </div>
+</div>
+<div class="mb-3 row">
+    <label for="description" class="col-sm-2 col-form-label">Description</label>
+    <div class="col-sm-10">
+        <input type="text" readonly class="form-control" id="title" value="@Model.Quiz.Description">
+    </div>
+</div>
+    
+    @if(Model.Questions != null) 
+    {
+        <h1>Questions</h1>
+    <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Content</th>
+                    <th>Answer 1</th>
+                    <th>Answer 2</th>
+                    <th>Answer 3</th>
+                    <th>Answer 4</th>
+                    <th>View Question</th>
+                 
+                </tr>
+            </thead>
+            <tbody>
+                
+                @foreach (var question in Model.Questions)
+                {
+                   
+                      <tr>
+                        <td>@question.Content</td>
+                        <td class="@((question.CorrectAnswerId == @question.Answers.ElementAt(0).Id)? "bg-success text-white" : "")">@question.Answers.ElementAt(0).Content</td>
+                        <td class="@((question.CorrectAnswerId == @question.Answers.ElementAt(1).Id)? "bg-success text-white" : "")">@question.Answers.ElementAt(1).Content</td>
+                        <td class="@((question.CorrectAnswerId == @question.Answers.ElementAt(2).Id)? "bg-success text-white" : "")">@question.Answers.ElementAt(2).Content</td>
+                        <td class="@((question.CorrectAnswerId == @question.Answers.ElementAt(3).Id)? "bg-success text-white" : "")">@question.Answers.ElementAt(3).Content</td>
+                        <td ><a class="btn btn-primary" href="/Question/@question.Id" role="button">View Question</a></td>
+                    </tr>
+                }
+            </tbody>
+           
+        </table>
+        
+    }
+<div class="add-question">
+    <a class="btn btn-primary" href="/AddQuestion/@Model.Quiz.Id" role="button">Add Question</a>
+</div>

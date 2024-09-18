@@ -1,0 +1,36 @@
+﻿@page
+@model QuizApp.Pages.QuizzesModel
+@{
+}
+<div class="list-quizzes">
+    <h1>List of Quizzes</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>View Quiz</th>
+                <th>Take Quiz</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var quiz in Model.Quizzes)
+            {
+                var accessible = quiz.Questions.Count >= 1;
+                <tr>
+                    <td>@quiz.Id</td>
+                    <td>@quiz.Title</td>
+                    <td>@quiz.Description</td>
+                    <td><a href="/Quiz/@quiz.Id" class="btn btn-primary">View Quiz</a></td>
+                    <td><a href="/TakeQuiz/@quiz.Id" class="@(accessible ? "btn btn-primary" : "btn btn-primary disabled")" role="button" aria-disabled="@(accessible? "true":"false")">Take Quiz</a></td>
+                </tr>
+            
+            }
+        </tbody>
+    </table>
+</div>
+
+<div class="add-quiz">
+    <a class="btn btn-primary" href="/AddQuiz" role="button">Add Quiz</a>
+</div>

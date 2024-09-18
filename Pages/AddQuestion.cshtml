@@ -1,0 +1,47 @@
+﻿@page "{quizId}"
+@model QuizApp.Pages.AddQuestionModel
+@{
+}
+ <h1>Add Question</h1>
+ 
+ <form method="post">
+    <div class="mb-3">
+        <label for="content" class="form-label">Enter you question here</label>
+        <input type="text" class="form-control" asp-for="QuestionContent" id="content">
+        <span asp-validation-for="@Model.QuestionContent"/>
+    </div>
+    <h2>Answers</h2>
+    <p>Tick the correct answer</p>
+    <div class="input-group mb-3">
+        <div class="input-group-text">
+            <input class="form-check-input mt-0" type="radio" value=0 asp-for="CorrectAnswerIndex" aria-label="Radio button for following text input" required>
+        </div>
+        <input type="text" asp-for="Answer1" class="form-control" aria-label="Text input with radio button">
+        <span asp-validation-for="@Model.Answer1"></span>
+    </div>
+    <div class="input-group mb-3">
+        <div class="input-group-text">
+            <input class="form-check-input mt-0" type="radio" value=1 asp-for="CorrectAnswerIndex" aria-label="Radio button for following text input">
+        </div>
+        <input type="text" asp-for="Answer2" class="form-control" aria-label="Text input with radio button">
+        <span asp-validation-for="@Model.Answer2"></span>
+    </div>
+    <div class="input-group mb-3">
+        <div class="input-group-text">
+            <input class="form-check-input mt-0" type="radio" value=2 asp-for="CorrectAnswerIndex" aria-label="Radio button for following text input">
+        </div>
+        <input type="text" asp-for="Answer3" class="form-control" aria-label="Text input with radio button">
+        <span asp-validation-for="@Model.Answer3"></span>
+    </div>
+    <div class="input-group mb-3">
+        <div class="input-group-text">
+            <input class="form-check-input mt-0" type="radio" value=3 asp-for="CorrectAnswerIndex" aria-label="Radio button for following text input">
+        </div>
+        <input type="text" asp-for="Answer4" class="form-control" aria-label="Text input with radio button">
+        <span asp-validation-for="@Model.Answer4"></span>
+    </div>
+    <input type="hidden" name="quizId" value="@Model.QuizId"/>
+    <div class="col-auto">
+        <button type="submit" class="btn btn-primary">Add Question</button>
+    </div>
+ </form>

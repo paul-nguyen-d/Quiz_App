@@ -1,0 +1,34 @@
+﻿@page "{quizId}"
+@model QuizApp.Pages.TakeQuizModel
+@{
+}
+
+<h1>Take Quiz</h1>
+
+<p>For each question, choose one answer</p>
+<form method="post">
+    @for (var i = 0; i < Model.Questions.Count; i++)
+    {
+        <div class="mb-3">
+
+            <h2 class="text-md-start border-secondary">@Model.Questions.ElementAt(i).Content</h2>
+
+            @for (var j = 0; j < Model.Questions.ElementAt(i).Answers.Count; j++)
+            {
+
+                <div class="input-group mb-3">
+                    <input type="hidden" value="@Model.Questions.ElementAt(i).Answers.ElementAt(j).Id" />
+                    <div class="input-group-text">
+                        <input class="form-check-input mt-0" type="radio" value="@Model.Questions.ElementAt(i).Answers.ElementAt(j).Id" asp-for="Responses[i].AnswerId" aria-label="Radio button for following text input" required />
+                    </div>
+                    <input type="text" value="@Model.Questions.ElementAt(i).Answers.ElementAt(j).Content" class="form-control" aria-label="Text input with radio button">
+                </div>
+            }
+
+            <input type="hidden" asp-for="Responses[i].QuestionId" value="@Model.Questions.ElementAt(i).Id" />
+            <span asp-validation-for="Responses[i].AnswerId"></span>
+        </div>
+       
+    }
+    <button type="submit" class="btn btn-primary">Submit Answers</button>
+</form>

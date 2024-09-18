@@ -1,0 +1,51 @@
+﻿@page "{questionID}"
+@model QuizApp.Pages.QuestionModel
+
+@{
+
+}
+<h1>Question Details</h1>
+
+<form method="post">
+    <div class="mb-3">
+        <label for="content" class="form-label">Enter you question here</label>
+        <input type="text" class="form-control" asp-for="QuestionVM.Content" id="content">
+        <span asp-validation-for="@Model.QuestionVM.Content" />
+    </div>
+    <h2>Answers</h2>
+    <p>Tick the correct answer</p>
+
+    @for(var i=0;i<Model.AnswerVMs.Count;i++)
+    {
+        <div class="input-group mb-3">
+            <input type="hidden" asp-for="@Model.AnswerVMs[i].Id" value="@Model.AnswerVMs[i].Id" />
+            <div class="input-group-text">
+                <input class="form-check-input mt-0" type="radio" value="@Model.AnswerVMs[i].Id" asp-for="QuestionVM.CorrectAnswerId" aria-label="Radio button for following text input" required checked="@(Model.AnswerVMs[i].Id == Model.QuestionVM.CorrectAnswerId)" />
+            </div>
+            <input type="text" asp-for="@Model.AnswerVMs[i].Content" class="form-control" value="@Model.AnswerVMs[i].Content" aria-label="Text input with radio button">
+            <span asp-validation-for="@Model.AnswerVMs[i].Content"></span>
+        </div>
+    }
+    <input type="hidden" asp-for="@Model.QuestionVM.Id" value="@Model.QuestionVM.Id" />
+
+    <div class="mb-3">
+        <button type="submit" class="btn btn-primary">Confirm Changes</button>
+      
+    </div>
+
+
+</form>
+<div class="mb-3">
+    <form method="post" id="deleteForm" asp-page-handler="Delete">
+        <input type="hidden" asp-for="@Model.QuestionVM.Id" value="@Model.QuestionVM.Id" />
+        <button type="button" onclick="confirmDelete()" class="btn btn-danger">Delete Question</button>
+    </form>
+</div>
+
+<script>
+    const confirmDelete = () => {
+        if (confirm("Are you sure you want to delete this question?")) {
+            document.getElementById("deleteForm").submit();
+        }
+    }
+</script>
